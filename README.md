@@ -1,13 +1,13 @@
-# Déploiement de modèles de machine learning à travers FastApi, Docker et Kubernetes
+### Déploiement de modèles de machine learning à travers FastApi, Docker et Kubernetes
 Ce répertoire contient le code et les différentes étapes relatives à : 
- - La préparation des données.
- - La contruction et le choix des modèles.
- - La construction de l'API avec FastApi, contenant les routes: status, prediction unitaire, prédiction par fichier et réentrainement et sauvegarde du modèle.
+ - Le nettoyage et exploration des données.
+ - La contruction, choix et sauvegarde des modèles.
+ - La construction de l'API avec FastApi, contenant les routes: status, prediction unitaire, prédiction par fichier, réentrainement et sauvegarde du modèle.
  - La construction de l'image et du container Docker.
- - Au déploiement de l'API et du container sur Kubernetes
+ - Au déploiement de l'API et du container sur Kubernetes.
  
 Les fichiers relatifs aux différentes étapes sont les suivants: 
--
+- preprocessing.ipynb: Notebook qui permet de nettoyer et explorer les données.
 -
 -
 -
