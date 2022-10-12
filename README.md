@@ -1,4 +1,4 @@
-### Déploiement de modèles de machine learning à travers FastApi, Docker et Kubernetes
+## Déploiement de modèles de machine learning à travers FastApi, Docker et Kubernetes
 Ce répertoire contient le code et les différentes étapes relatives à : 
  - Le nettoyage et exploration des données.
  - La contruction, choix et sauvegarde des modèles.
