@@ -1,0 +1,21 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+ name: churn_prediction_deployment
+ labels:
+  app: churn_prediction_api
+spec:
+ replicas: 3
+ selector:
+  matchLabels:
+      app: churn_prediction_api
+  template:
+    metadata:
+      labels:
+        app: churn_prediction_api
+    spec:
+     containers:
+     - name: churn_prediction_api
+       image: churn_prediction:latest
+       ports:
+       - containerPort: 8000

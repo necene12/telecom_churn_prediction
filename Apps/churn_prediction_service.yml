@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: churn_prediction_service
+  labels:
+    app: churn_prediction_api
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8001
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: churn_prediction_api
