@@ -16,13 +16,16 @@ Les fichiers relatifs aux différentes étapes sont les suivants:
 - api_fastapi.py: le fichier de l'api
 - Dockerfile: qui contient les instruction pour la création et l'exécution du container docker
 
+Installer les packages nécessaires au fonctionnement de l'api à travers le contenu du fichier requirements.txt
+ pip3 install -r requirements.txt
+
 Exécuté les commandes suivante à la racine du répertoire /Apps pour construire l'image docker, la sauvegarder et l'exécuter
   cd /Apps
   sh setup.sh
 
 - Installer kubectl sur votre machine et exécuter les commandes suivantes:
   kubectl create -f churn_prediction_deployment.yml
-- gestion du service pour l'exposition de l'api
+- déploiement de service de type clusterIP pour l'exposition de l'api
   kubectl create -f churn_prediction_service.yml
   kubectl expose deploy churn_prediction_deployment --type=ClusterIP --port=8002 --target-port=8000 --name churn_prediction_service
 - gestion de l'ingress pour l'exposition de l'api
