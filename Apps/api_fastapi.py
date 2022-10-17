@@ -93,9 +93,6 @@ reg_log = joblib.load(open('model_regressionlogistique.pkl','rb'))
 # Import du modèle AdboostClassifier sauvegardé
 adboostclass = joblib.load(open('model_AdboostClassifier.pkl', 'rb'))
 
-# Définition par l'utilisateur du modèle à considérer pour les prédictions 
-modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?')
-
 # Construction du pipelines de tranformation des données:
 numeric_transformer = Pipeline(steps=[
        ('imputer', SimpleImputer(strategy='mean')),
@@ -113,13 +110,6 @@ preprocessor = ColumnTransformer(
     ('categorical', categorical_transformer, colonnes_categorielles)
 ]) 
 
-# Pipeline de prédiction sur la base des données saisie par l'utilisateur
-pipeline_prediction = Pipeline(steps = [
-               ('preprocessor', preprocessor),
-               ('Oversampling', SMOTE()),
-               ('regressor',modele_choisi)
-           ])
-
 ### Route de prédiction unitaires en fonctions des valeurs saisis par l'utilisateur
 @api.post('/prediction_unitaire', name='Retourne les prédictions à partir de valeurs de variables saisie manuellement par l\'utilisateur')
 def prediction_unitaire(variables_explicatives: VariablesExplicatives):
@@ -129,19 +119,33 @@ def prediction_unitaire(variables_explicatives: VariablesExplicatives):
     Returns:
         _type_: _description_
     """
+    # Pipeline de prédiction sur la base des données saisie par l'utilisateur
+    pipeline_prediction = Pipeline(steps = [
+               ('preprocessor', preprocessor),
+               ('Oversampling', SMOTE()),
+               ('regressor',modele_choisi)
+           ])
+    # Définition par l'utilisateur du modèle à considérer pour les prédictions 
+    modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?')
     return [pipeline_prediction.predict(variables_explicatives)]
 
 
 ### Route de rédiction en masse à partir de fichier csv
-# construction du dataframe des variable cibles d'entrée
-df = pd.read_csv(input('renseigner le nom du fichier suivi de l\'extention .csv du répertoire courant:'), sep=";")
-# suppression des variables qu'on utilisera pas pour prédire la variables cible
-X = df.drop(colonnes_a_supprimer, axis='columns')
-
 @api.post('/prediction_en_masse',name='Prédiction sur la base du modèle choisi et à partir des variables explicatives d\'un fichier csv')
 def prediction_en_masse(X):
     """Affichage des prédictions sur la base des fichier csv contenant les variables explicatives
     """
+    # construction du dataframe des variable cibles d'entrée
+    df = pd.read_csv(input('renseigner le nom du fichier suivi de l\'extention .csv du répertoire courant:'), sep=";")
+    # suppression des variables qu'on utilisera pas pour prédire la variables cible
+    X = df.drop(colonnes_a_supprimer, axis='columns')
+    # Pipeline de prédiction sur la base des données saisie par l'utilisateur
+    modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?') 
+    pipeline_prediction = Pipeline(steps = [
+               ('preprocessor', preprocessor),
+               ('Oversampling', SMOTE()),
+               ('regressor', modele_choisi)
+           ])
     return [X.append(pipeline_prediction.predict(X))]
     
 ### Route de réentrainement et sauvegrade du modèle
