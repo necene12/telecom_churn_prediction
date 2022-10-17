@@ -189,4 +189,4 @@ def reentrainement():
     model_adboost = pipeline_adboost.fit(X,y)
     joblib.dump(model_reglog, './model_regressionlogistique.pkl')
     joblib.dump(model_adboost, './model_AdboostClassifier.pkl')
-    print("Les deux modèles Regression logistique et Classifieur Adboost ont été créé dans le même répertoire que celui de l'API")
+    print("Les deux modèles Regression logistique et Classifieur Adboost ont été créés dans le même répertoire que celui de l'API")
