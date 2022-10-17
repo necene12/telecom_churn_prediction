@@ -149,39 +149,39 @@ def prediction_en_masse():
     return [X.append(pipeline_prediction.predict(X))]
     
 ### Route de réentrainement et sauvegrade du modèle
-# Chargement des données
-dfsource = pd.read_csv("https://assets-datascientest.s3-eu-west-1.amazonaws.com/de/total/churn.csv")
-dfsource = dfsource.reset_index()
-dfsource = dfsource.replace(' ', np.nan)
-dfsource['TotalCharges'] = dfsource['TotalCharges'].astype('float64')
-dfsource.TotalCharges = dfsource.TotalCharges.fillna(0)
-dfsource['SeniorCitizen'].replace({0:'No',1:'Yes'}, inplace=True)
-dfsource['Churn'].replace({'No':0,'Yes':1}, inplace=True)
-dfsource['TotalCharges'] = pd.to_numeric(dfsource['TotalCharges'])
-dfsource = dfsource.drop(colonnes_a_supprimer,axis='columns')
-# Pipeline de construction du modèle et sauvegarde
-X = dfsource.drop(colonne_cible, axis='columns')
-y = dfsource[colonne_cible]
-# Transformation des données et construction du pipeline du modèle de regressionlogistique
-pipeline_reglog = Pipeline(steps = [
-               ('preprocessor', preprocessor),
-               ('Oversampling', SMOTE()),
-               ('regressor',LogisticRegression())
-           ])
-# Construction du modèle de regression logistique
-model_reglog = pipeline_reglog.fit(X, y)
-# Pipeline adboost
-pipeline_adboost = Pipeline(steps = [
-               ('preprocessor', preprocessor),
-               ('Oversampling', SMOTE()),
-               ('regressor',AdaBoostClassifier())
-           ])
-# Construction du modèle AdboostClassifier
-model_adboost = pipeline_adboost.fit(X,y)
 
 @api.post('/reentrainement_du_modele',name='entrainement du modèle sur la base des données initiale pour assurer la bonne performance du modèle')
 def reentrainement():
     """entraine de sauvegarde nouveau le modèle
     """
+    # Chargement des données
+    dfsource = pd.read_csv("https://assets-datascientest.s3-eu-west-1.amazonaws.com/de/total/churn.csv")
+    dfsource = dfsource.reset_index()
+    dfsource = dfsource.replace(' ', np.nan)
+    dfsource['TotalCharges'] = dfsource['TotalCharges'].astype('float64')
+    dfsource.TotalCharges = dfsource.TotalCharges.fillna(0)
+    dfsource['SeniorCitizen'].replace({0:'No',1:'Yes'}, inplace=True)
+    dfsource['Churn'].replace({'No':0,'Yes':1}, inplace=True)
+    dfsource['TotalCharges'] = pd.to_numeric(dfsource['TotalCharges'])
+    dfsource = dfsource.drop(colonnes_a_supprimer,axis='columns')
+    # Pipeline de construction du modèle et sauvegarde
+    X = dfsource.drop(colonne_cible, axis='columns')
+    y = dfsource[colonne_cible]
+    # Transformation des données et construction du pipeline du modèle de regressionlogistique
+    pipeline_reglog = Pipeline(steps = [
+                ('preprocessor', preprocessor),
+                ('Oversampling', SMOTE()),
+                ('regressor',LogisticRegression())
+            ])
+    # Construction du modèle de regression logistique
+    model_reglog = pipeline_reglog.fit(X, y)
+    # Pipeline adboost
+    pipeline_adboost = Pipeline(steps = [
+                ('preprocessor', preprocessor),
+                ('Oversampling', SMOTE()),
+                ('regressor',AdaBoostClassifier())
+            ])
+    # Construction du modèle AdboostClassifier
+    model_adboost = pipeline_adboost.fit(X,y)
     joblib.dump(model_reglog, './model_regressionlogistique.pkl')
     joblib.dump(model_adboost, './model_AdboostClassifier.pkl')
