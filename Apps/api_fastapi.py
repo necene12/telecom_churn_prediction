@@ -87,12 +87,6 @@ class VariablesExplicatives(BaseModel):
     MonthlyCharges:float
     TotalCharges:float
 
-### Import des modèles entrainés:
-# Import du modèle de régression logistique sauvegardé
-reg_log = joblib.load(open('model_regressionlogistique.pkl','rb'))
-# Import du modèle AdboostClassifier sauvegardé
-adboostclass = joblib.load(open('model_AdboostClassifier.pkl', 'rb'))
-
 # Construction du pipelines de tranformation des données:
 numeric_transformer = Pipeline(steps=[
        ('imputer', SimpleImputer(strategy='mean')),
@@ -119,7 +113,12 @@ def prediction_unitaire(variables_explicatives: VariablesExplicatives):
     Returns:
         _type_: _description_
     """
-    # Définition par l'utilisateur du modèle à considérer pour les prédictions 
+    # Définition par l'utilisateur du modèle à considérer pour les prédictions
+    # Import des modèles entrainés:
+    # Import du modèle de régression logistique sauvegardé
+    reg_log = joblib.load(open('model_regressionlogistique.pkl','rb'))
+    # Import du modèle AdboostClassifier sauvegardé
+    adboostclass = joblib.load(open('model_AdboostClassifier.pkl', 'rb')) 
     modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?')
     # Pipeline de prédiction sur la base des données saisie par l'utilisateur
     pipeline_prediction = Pipeline(steps = [
@@ -139,6 +138,11 @@ def prediction_en_masse():
     df = pd.read_csv(input('renseigner le nom du fichier suivi de l\'extention .csv du répertoire courant:'), sep=";")
     # suppression des variables qu'on utilisera pas pour prédire la variables cible
     X = df.drop(colonnes_a_supprimer, axis='columns')
+    # Import des modèles entrainés:
+    # Import du modèle de régression logistique sauvegardé
+    reg_log = joblib.load(open('model_regressionlogistique.pkl','rb'))
+    # Import du modèle AdboostClassifier sauvegardé
+    adboostclass = joblib.load(open('model_AdboostClassifier.pkl', 'rb'))
     # Pipeline de prédiction sur la base des données saisie par l'utilisateur
     modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?') 
     pipeline_prediction = Pipeline(steps = [
