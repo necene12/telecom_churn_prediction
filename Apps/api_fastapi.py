@@ -119,14 +119,14 @@ def prediction_unitaire(variables_explicatives: VariablesExplicatives):
     Returns:
         _type_: _description_
     """
+    # Définition par l'utilisateur du modèle à considérer pour les prédictions 
+    modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?')
     # Pipeline de prédiction sur la base des données saisie par l'utilisateur
     pipeline_prediction = Pipeline(steps = [
                ('preprocessor', preprocessor),
                ('Oversampling', SMOTE()),
                ('regressor',modele_choisi)
            ])
-    # Définition par l'utilisateur du modèle à considérer pour les prédictions 
-    modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?')
     return [pipeline_prediction.predict(variables_explicatives)]
 
 
