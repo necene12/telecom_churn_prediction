@@ -132,7 +132,7 @@ def prediction_unitaire(variables_explicatives: VariablesExplicatives):
 
 ### Route de rédiction en masse à partir de fichier csv
 @api.post('/prediction_en_masse',name='Prédiction sur la base du modèle choisi et à partir des variables explicatives d\'un fichier csv')
-def prediction_en_masse(X):
+def prediction_en_masse():
     """Affichage des prédictions sur la base des fichier csv contenant les variables explicatives
     """
     # construction du dataframe des variable cibles d'entrée
@@ -180,7 +180,7 @@ pipeline_adboost = Pipeline(steps = [
 model_adboost = pipeline_adboost.fit(X,y)
 
 @api.post('/reentrainement_du_modele',name='entrainement du modèle sur la base des données initiale pour assurer la bonne performance du modèle')
-def reentrainement(X):
+def reentrainement():
     """entraine de sauvegarde nouveau le modèle
     """
     joblib.dump(model_reglog, './model_regressionlogistique.pkl')
