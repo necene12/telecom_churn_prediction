@@ -1,4 +1,5 @@
 #Import des packages
+from os import sep
 import pandas as pd
 import numpy as np
 from fastapi import Depends, FastAPI
@@ -58,8 +59,7 @@ colonnes_categorielles = ['gender',
 colonnes_numeriques =['tenure',
                       'MonthlyCharges',
                       'TotalCharges']
-# Variable à supprimer
-colonnes_a_supprimer=['customerID']
+
 # Variable cible
 colonne_cible = ['Churn']
 
@@ -89,9 +89,9 @@ class VariablesExplicatives(BaseModel):
 
 ### Import des modèles entrainés:
 # Import du modèle de régression logistique sauvegardé
-reg_log = pickle.load(open('model_regressionlogistique.pkl', 'rb'))
+reg_log = joblib.load(open('model_regressionlogistique.pkl','rb'))
 # Import du modèle AdboostClassifier sauvegardé
-adboostclass = pickle.load(open('model_AdboostClassifier.pkl', 'rb'))
+adboostclass = joblib.load(open('model_AdboostClassifier.pkl', 'rb'))
 
 # Définition par l'utilisateur du modèle à considérer pour les prédictions 
 modele_choisi = input('Définir le modèle à utiliser = reg_log ou adboostclass?')
@@ -134,7 +134,7 @@ def prediction_unitaire(variables_explicatives: VariablesExplicatives):
 
 ### Route de rédiction en masse à partir de fichier csv
 # construction du dataframe des variable cibles d'entrée
-df = pd.read_csv(input('renseigner le nom du fichier suivi de l\'extention .csv du répertoire courant:'))
+df = pd.read_csv(input('renseigner le nom du fichier suivi de l\'extention .csv du répertoire courant:'), sep=";")
 # suppression des variables qu'on utilisera pas pour prédire la variables cible
 X = df.drop(colonnes_a_supprimer, axis='columns')
 
