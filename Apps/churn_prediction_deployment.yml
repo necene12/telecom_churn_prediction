@@ -16,6 +16,6 @@ spec:
     spec:
      containers:
      - name: churn_prediction_api
-       image: churn_prediction:latest
+       image: necene12/nc:churn_prediction_nc
        ports:
        - containerPort: 8000
