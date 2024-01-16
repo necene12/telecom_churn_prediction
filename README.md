@@ -69,7 +69,7 @@ $  sh setup.sh
 
 #### c- Exécuter l'API sous Kubernetes
 -----------------
-1. Installer kubectl sur votre machine linux :
+1. Installer kubectl sur votre machine linux et déployer le container Docker sur Kubernetes:
 ```bash
   sudo apt-get update && sudo apt-get install -y apt-transport-https
   curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
