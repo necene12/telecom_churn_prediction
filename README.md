@@ -71,6 +71,7 @@ $  sh setup.sh
 -----------------
 1. Installer kubectl sur votre machine et exécuter les commandes suivantes:
 ```bash
+  curl -LO https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
   kubectl create -f churn_prediction_deployment.yml
 ```
 2. Déployer de service de type clusterIP pour l'exposition de l'api
