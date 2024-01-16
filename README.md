@@ -69,9 +69,14 @@ $  sh setup.sh
 
 #### c- Exécuter l'API sous Kubernetes
 -----------------
-1. Installer kubectl sur votre machine et exécuter les commandes suivantes:
+1. Installer kubectl sur votre machine linux :
 ```bash
-  curl -LO https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+  sudo apt-get update && sudo apt-get install -y apt-transport-https
+  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+  sudo apt-get update
+  sudo apt-get install -y kubectl
+
   kubectl create -f churn_prediction_deployment.yml
 ```
 2. Déployer de service de type clusterIP pour l'exposition de l'api
