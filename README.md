@@ -11,7 +11,7 @@
 
 #### Détail des fichiers: 
 -----------------
-Les fichiers relatifs aux différentes étapes sont les suivants: 
+ 
 ```bash
  Notebook qui permet de nettoyer et explorer les données
  preprocessing.ipynb
