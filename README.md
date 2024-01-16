@@ -5,7 +5,7 @@
 * Nettoyage et exploration des données.
 * Contruction, choix et sauvegarde du modèle.
 * Construction de l'API par FastApi, avec les routes: status, prediction unitaire, prédiction par fichier, réentrainement et  sauvegarde du modèle.
-* Construction de l'image et du container Docker.
+* Construction de container et de l'image Docker.
 * Déploiement de l'API et du container sur Kubernetes.
 -----------------
 
