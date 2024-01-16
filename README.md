@@ -17,7 +17,7 @@
  preprocessing.ipynb
 ```
 ```bash
- Pour la construction et sauvegarde des modèles à partir des données sources
+ Notebook la construction et sauvegarde des modèles à partir des données sources
  construction_sauvegarde_de_modeles.ipynb 
 ```
 ```bash
