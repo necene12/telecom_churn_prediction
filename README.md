@@ -60,7 +60,7 @@ $ pip3 install -r requirements.txt
 
 #### b- Construire et sauvegarder le container Docker contenant l'API
 -----------------
-Exécuter les commandes suivante à la racine du répertoire où les fichiers ont été clonés pour construire l'image Docker, la sauvegarder et l'exécuter
+Exécuter le commande suivante à la racine du répertoire où les fichiers ont été clonés pour construire l'image Docker, la sauvegarder et l'exécuter
 ```bash
 $  cd /Apps
 $  sh setup.sh
