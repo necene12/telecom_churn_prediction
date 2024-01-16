@@ -1,12 +1,12 @@
-### Déploiement de modèles à travers FastApi, Docker et Kubernetes
+### Déploiement de modèle à travers FastApi, Docker et Kubernetes
 -----------------
 
-#### Ce répertoire contient le code et les différentes étapes relatives à : 
-* Le nettoyage et exploration des données.
-* La contruction, choix et sauvegarde des modèles.
-* La construction de l'API avec FastApi, contenant les routes: status, prediction unitaire, prédiction par fichier, réentrainement et  sauvegarde du modèle.
-* La construction de l'image et du container Docker.
-* Au déploiement de l'API et du container sur Kubernetes.
+#### Ce répertoire contient les différentes étapes : 
+* Nettoyage et exploration des données.
+* Contruction, choix et sauvegarde des modèles.
+* Construction de l'API avec FastApi, contenant les routes: status, prediction unitaire, prédiction par fichier, réentrainement et  sauvegarde du modèle.
+* Construction de l'image et du container Docker.
+* Déploiement de l'API et du container sur Kubernetes.
 -----------------
 
 #### Détail des fichiers: 
