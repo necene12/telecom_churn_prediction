@@ -76,6 +76,7 @@ $  sh setup.sh
   echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
   sudo apt-get update
   sudo apt-get install -y kubectl
+  chmod +x ./kubectl
 
   kubectl create -f churn_prediction_deployment.yml
 ```
