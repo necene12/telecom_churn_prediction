@@ -29,7 +29,7 @@
  model_regressionlogistique.pkl
 ```
 ```bash
- permet de construire l\'image,exécute et sauvegarder le container
+ permet de construire l'image Docker, exécuter et sauvegarder le container Docker
  setup.sh 
 ```
 ```bash
