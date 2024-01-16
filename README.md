@@ -9,7 +9,7 @@
 * Déploiement de l'API et du container sur Kubernetes.
 -----------------
 
-#### Détail des fichiers: 
+#### Description des fichiers: 
 -----------------
  
 ```bash
